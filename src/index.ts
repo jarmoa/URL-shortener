@@ -53,7 +53,7 @@ app.post('/shorten', (req: Request, res: Response) => {
 });
 
 // Route to redirect to the original URL
-app.get('/:shortCode', (req: Request, res: Response) => {
+app.get('/redirect/:shortCode', (req: Request, res: Response) => {
   const shortCode = req.params.shortCode;
   const mapping = urlDatabase[shortCode];
 
