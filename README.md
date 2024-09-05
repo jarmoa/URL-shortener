@@ -3,7 +3,7 @@ npx tsc
 node dist/index.js
 
 
-# Functional requirements 
+### Functional requirements 
 
 User can shorten any URL using your service by submitting it to your ‘/shorten’ HTTP endpoint using POST method
 User can add additional parameter in ‘/shorten’ requests to propose a code, e.g. my123 . If the code is free, it will be allocated to that user and its URL.
@@ -16,7 +16,7 @@ System needs to keep track of how many times each short code was used in redirec
 User can access their short codes through ‘/stats’ GET endpoint and get information about their codes, URLs and counters
 
 
-# Non-functional requirements
+### Non-functional requirements
 
 Availability: We want our system to be available at all times at any cost because we want our users to access any URL anytime.
 Scalability: We want our system to be capable enough to handle an increasing number of URLs.
@@ -27,7 +27,7 @@ Unpredictability: We want our system to generate highly unpredictable and unique
 
 Database: For services like URL shortening, there isn’t a lot of data to store. However, the storage has to be horizontally scalable. The types of data we need to store include:
 
-# User details
+### User details
 Mappings of the URLs (the long URLs that are mapped onto short URLs)
 Since the stored records will have no relationships among themselves other than linking the URL-creating user’s details, so we don’t need structured storage for record keeping. Also, our system will be read-heavy, so NoSQL is a suitable choice for storing data. In particular, MongoDB is a good choice for the following reasons:
 
@@ -44,38 +44,38 @@ In the URL shortening service, nanoid is used to generate the short codes (e.g.,
 
 
 
-# Fulfilling no functional requirements 
+### Fulfilling no functional requirements 
 
-# Availability
+### Availability
 
 The Amazon S3 service backs up the storage and cache servers daily. We can restore them upon fault occurrence.
 Global server load balancing to handle the system's traffic
 Rate limiters to limit each user's resource allocation
 
 
-# Scalability
+### Scalability
 
 Horizontal sharding of the database
 Distribution of the data based on consistent hashing
 MongoDB as the NoSQL database
 
-# Readability
+### Readability
 
 Encoding URL winth nanoId
 Removal of non-alphanumeric characters
 Removal of look-alike characters
 
-# Latency
+### Latency
 
 Unnoticeable delay in the overall operation
 MongoDB because of its low latency and high throughput in reading tasks
 Distributed cache to minimize the service delays
 
-# Unpredictability
+### Unpredictability
 
 Randomly selecting and associating an ID to each request from the pool of unused and readily available unique IDs
 
-# Nice to have
+### Nice to have
 
 Load balancing: We can employ Global Server Load Balancing (GSLB) apart from local load balancing to improve availability. Since we have plenty of time between a short URL being generated and subsequently accessed, we can safely assume that our database is geographically consistent and that distributing requests globally won’t cause any issues.
 
